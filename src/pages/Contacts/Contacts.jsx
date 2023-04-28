@@ -1,35 +1,45 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { fetchAllContacts } from '../../redux/contacts/operation';
+import {
+  selectIsLoading,
+  selectError,
+  selectStoreContacts,
+} from '../../redux/contacts/selectors';
 
-import { ContactsList } from '../ContactsList/ContactsList';
-import { AddContactForm } from '../AddContactForm/AddContactForm';
-import Modal from '../Modal/Modal';
+import { ContactsList } from '../../components/ContactsList/ContactsList';
+import { AddContactForm } from '../../components/Forms/AddContactForm';
+import Modal from '../../components/Modal/Modal';
 
-import IconButton from '../Button/IconButton';
+import IconButton from '../../components/Button/IconButton';
 import { MdPersonAdd, MdSearch } from 'react-icons/md';
 import { BsSortAlphaDown } from 'react-icons/bs';
 
-import { FilterByName } from '../FilterByName/FilterByName';
-import { Sort } from '../Sort/Sort';
+import { FilterByName } from '../../components/FilterByName/FilterByName';
+import { Sort } from '../../components/Sort/Sort';
 
 import css from './Contacts.module.css';
 export default function Contacts() {
   const [activeSort, setActiveSort] = useState(false);
   const [activeFilter, setActiveFilter] = useState(false);
-  const [modalActive, setModalActive] = useState(false);
+  const [modalAddContactActive, setModalAddContactActive] = useState(false);
 
-  // const isLoading = useSelector(selectIsLoading);
-  // const error = useSelector(selectError);
-  // const contactsList = useSelector(selectStoreContacts);
-  // const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const contactsList = useSelector(selectStoreContacts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllContacts());
+  }, [dispatch]);
 
   const toggleSort = () => {
     setActiveSort(!activeSort);
   };
 
   const toggleFilter = () => setActiveFilter(!activeFilter);
-  const toggleModal = () => setModalActive(!modalActive);
+  const toggleModal = () => setModalAddContactActive(!modalAddContactActive);
 
   //  викликаєм   dispatch(getTodos()) при загрузці сторінки ( монтуванні компонкнта App)
   // і так як  результаом  виклику  getTodos() є інша функція яка очікує  dispatch як параметр він туди передається автоматично
@@ -43,8 +53,8 @@ export default function Contacts() {
   return (
     <div className={css.contentWrapper}>
       <h2 className={css.title}>Contacts</h2>
-      <FilterByName activeFilter={activeFilter} />
-      <Sort activeSort={activeSort} />
+      {/* <FilterByName activeFilter={activeFilter} />
+      <Sort activeSort={activeSort} /> */}
 
       <IconButton
         onClick={toggleSort}
@@ -71,17 +81,16 @@ export default function Contacts() {
         <MdPersonAdd />
       </IconButton>
 
-      {modalActive && (
+      {modalAddContactActive && (
         <Modal togglModal={toggleModal}>
           <AddContactForm />
         </Modal>
       )}
       <div>
-        {/* {isLoading && <p>Loading contacts...</p>}
-        {error && <p>{error}</p>} */}
+        {isLoading && <p>Loading contacts...</p>}
+        {error && <p>{error}</p>}
       </div>
-      {/* {contactsList && <ContactsList />} */}
-      <ContactsList />
+      {contactsList && <ContactsList />}
     </div>
   );
 }

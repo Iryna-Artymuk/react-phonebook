@@ -1,14 +1,15 @@
 import { MdClose } from 'react-icons/md';
 import IconButton from '../../Button/IconButton';
-import { deleteContact } from '../../../redux/operations';
+import { deleteContact } from '../../../redux/contacts/operation';
 import { useDispatch } from 'react-redux';
 import css from './ContactItem.module.css';
 
 export const ContactItem = ({ data }) => {
-  //   console.log(data);
+  // console.log(data);
   const dispatch = useDispatch();
   const handelClick = () => {
     dispatch(deleteContact(data.id));
+    // console.log(data.id);
   };
   return (
     <li
@@ -17,9 +18,12 @@ export const ContactItem = ({ data }) => {
       }}
     >
       <div className={css.contactWrapper}>
-        <img src={data.avatar} alt={'contact avatar'} width={100} />
-        <p>{data.name}</p>
-        <p>{data.phone_number}</p>
+        {/* <img src={data.avatar} alt={'contact avatar'} width={100} /> */}
+        <div className={css.contactInfo}>
+          <p>{data.name}</p>
+          <p>{data.number}</p>
+        </div>
+
         <IconButton onClick={handelClick}>
           <MdClose size={24} />
         </IconButton>

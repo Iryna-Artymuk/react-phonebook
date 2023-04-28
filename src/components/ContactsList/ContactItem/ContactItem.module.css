@@ -8,3 +8,7 @@
 .contactWrapper p {
   width: 30%;
 }
+.contactInfo {
+  width: 100%;
+  display: flex;
+}

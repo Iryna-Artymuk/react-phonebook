@@ -2,8 +2,8 @@ import Select from 'react-select';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { sortAtoZ } from '../../redux/contactsListSlice';
-import { sortZtoA } from '../../redux/contactsListSlice';
+// import { sortAtoZ } from '../../redux/contactsListSlice';
+// import { sortZtoA } from '../../redux/contactsListSlice';
 
 import css from './Sort.module.css';
 import clsx from 'clsx';
@@ -46,11 +46,11 @@ export function Sort({ activeSort }) {
 
   const dispatch = useDispatch();
   // console.log(selectedOption);
-  useEffect(() => {
-    selectedOption?.value === 'AtoZ'
-      ? dispatch(sortAtoZ())
-      : dispatch(sortZtoA());
-  }, [selectedOption, dispatch]);
+  // useEffect(() => {
+  //   selectedOption?.value === 'AtoZ'
+  //     ? dispatch(sortAtoZ())
+  //     : dispatch(sortZtoA());
+  // }, [selectedOption, dispatch]);
   return (
     <div
       className={clsx(css.sortWrapper, {
