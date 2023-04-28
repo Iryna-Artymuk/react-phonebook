@@ -41,3 +41,17 @@ export const logIn = createAsyncThunk(
     }
   }
 );
+
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    const res = await axios.post('/users/logout');
+
+    // робить запит на бекенд за адресою  axios.defaults.baseURL+ '/users/logout'
+    // видаляє токен з запиту
+    //  якщо успішний запит редюсер видадяє дані юзера і токен з стору змінює статус логіна на false
+    return res.data;
+  } catch (error) {
+    console.log(error.message);
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
