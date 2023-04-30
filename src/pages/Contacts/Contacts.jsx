@@ -17,7 +17,7 @@ import { MdPersonAdd, MdSearch } from 'react-icons/md';
 import { BsSortAlphaDown } from 'react-icons/bs';
 
 import { FilterByName } from '../../components/FilterByName/FilterByName';
-import { Sort } from '../../components/Sort/Sort';
+// import { Sort } from '../../components/Sort/Sort';
 
 import css from './Contacts.module.css';
 export default function Contacts() {
@@ -41,20 +41,11 @@ export default function Contacts() {
   const toggleFilter = () => setActiveFilter(!activeFilter);
   const toggleModal = () => setModalAddContactActive(!modalAddContactActive);
 
-  //  викликаєм   dispatch(getTodos()) при загрузці сторінки ( монтуванні компонкнта App)
-  // і так як  результаом  виклику  getTodos() є інша функція яка очікує  dispatch як параметр він туди передається автоматично
-  // або можна підставти    dispatch(getTodos( dispatch));
-  // і виконуються функція з файлу operations.js яка робить
-  //   робиться асинхронний запит на бекенд щоб отримати список завданні і передати payload який reducer запише в state
-  // також відправляє  всі інші  екшени
-  // useEffect(() => {
-  //   dispatch(fetchContactsData());
-  // }, [dispatch]);
   return (
     <div className={css.contentWrapper}>
       <h2 className={css.title}>Contacts</h2>
-      {/* <FilterByName activeFilter={activeFilter} />
-      <Sort activeSort={activeSort} /> */}
+      <FilterByName activeFilter={activeFilter} />
+      {/* <Sort activeSort={activeSort} />  */}
 
       <IconButton
         onClick={toggleSort}

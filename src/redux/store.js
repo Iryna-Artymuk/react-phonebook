@@ -12,7 +12,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-// import { filterReducer } from '../redux/filter/slice';
+import { filterReducer } from '../redux/FilterByName/slice';
 
 // import { authReducer } from '../redux/auth/slice';
 
@@ -30,7 +30,7 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     contacts: contactsReducer,
-    // filter: filterReducer,
+    filter: filterReducer,
     auth: persistReducer(authPersistConfig, authReducer),
   },
   middleware: getDefaultMiddleware =>
