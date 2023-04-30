@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logout } from '../Auth/operations';
+import { register, logIn, logout, updateUser } from '../Auth/operations';
 const initialState = {
   user: { name: null, email: null },
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  authError: null,
 };
 
 // name буде додаватись до кожного екшену
@@ -29,6 +30,13 @@ const authSlice = createSlice({
       state.user = { name: null, email: null };
       state.token = null;
       state.isLoggedIn = false;
+    },
+    [updateUser.fulfilled](state, action) {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+    },
+    [updateUser.rejected](state, action) {
+      state.authError = action.payload;
     },
   },
 });

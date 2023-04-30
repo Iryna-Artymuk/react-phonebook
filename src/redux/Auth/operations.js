@@ -1,11 +1,9 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
+import { token } from '../../utils/token';
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 // допоміжна функція яка буде отриувати токен і додават його до кожного запиту
-const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+
 //операція реєстрації юзера
 //шлях який додати до baseURL берем і документації бекенду /users/signup
 // usercredentials обєкт  які отримуєм з форми реєстраціх
@@ -17,7 +15,7 @@ export const register = createAsyncThunk(
       const res = await axios.post('/users/signup', credentials);
       console.log(res.data);
       // після успігної  реєстрації треба додати отриманий токен до кожного наступного запиту
-      setAuthHeader(res.data.token);
+      token.set(res.data.token);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -33,7 +31,7 @@ export const logIn = createAsyncThunk(
       const res = await axios.post('/users/login', credentials);
       console.log(res.data);
       // після успішного   запиту  треба додати отриманий токен до кожного наступного запиту
-      setAuthHeader(res.data.token);
+      token.set(res.data.token);
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -49,9 +47,33 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     // робить запит на бекенд за адресою  axios.defaults.baseURL+ '/users/logout'
     // видаляє токен з запиту
     //  якщо успішний запит редюсер видадяє дані юзера і токен з стору змінює статус логіна на false
+    token.clear();
     return res.data;
   } catch (error) {
     console.log(error.message);
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const updateUser = createAsyncThunk(
+  'auth/updateUser',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const tokenFromLocalStorage = state.auth.token;
+
+    if (tokenFromLocalStorage === null) {
+      // If there is no token, exit without performing any request
+      return thunkAPI.rejectWithValue('Unable to find  user');
+    }
+
+    try {
+      // If there is a token, add it to the HTTP header and perform the request
+      token.set(tokenFromLocalStorage);
+      const res = await axios.get('/users/current');
+      console.log(res.data);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

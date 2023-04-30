@@ -1,15 +1,24 @@
 import { Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 import Layout from '../components/Layout/Layout';
 import HomePage from '../pages/Home/Home';
 import ContactsPage from '../pages/Contacts/Contacts';
 import Modal from '../components/Modal/Modal';
 import LogInForm from './Forms/LoginForm';
 import Registerform from './Forms/RegisterForm';
-
+import { updateUser } from '../redux/Auth/operations';
+import { useAuthSelect } from '../hooks/UseAuthSelect';
 export const App = () => {
   const [logInModal, setLogInModal] = useState(false);
   const [registerModal, setRegisterModal] = useState(false);
+  const dispatch = useDispatch();
+  const { authError } = useAuthSelect();
+  console.log(authError);
+  useEffect(() => {
+    dispatch(updateUser());
+  }, [dispatch]);
+
   return (
     <div>
       <Routes>
