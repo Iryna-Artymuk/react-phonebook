@@ -13,7 +13,7 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post('/users/signup', credentials);
-      console.log(res.data);
+      //   console.log(res.data);
       // після успігної  реєстрації треба додати отриманий токен до кожного наступного запиту
       token.set(res.data.token);
       return res.data;
@@ -70,7 +70,7 @@ export const updateUser = createAsyncThunk(
       // If there is a token, add it to the HTTP header and perform the request
       token.set(tokenFromLocalStorage);
       const res = await axios.get('/users/current');
-      console.log(res.data);
+      //   console.log(res.data);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -19,10 +19,9 @@ export const ContactItem = ({ data }) => {
     >
       <div className={css.contactWrapper}>
         {/* <img src={data.avatar} alt={'contact avatar'} width={100} /> */}
-        <div className={css.contactInfo}>
-          <p>{data.name}</p>
-          <p>{data.number}</p>
-        </div>
+
+        <p>{data.name}</p>
+        <p>{data.number}</p>
 
         <IconButton onClick={handelClick}>
           <MdClose size={24} />

@@ -33,6 +33,25 @@ const contactsSlice = createSlice({
     isLoading: false,
     error: null,
   },
+  reducers: {
+    sortAtoZ(state, action) {
+      // const sortState = [...state].sort(function (task1, task2) {
+      //   return task1.text.localeCompare(task2.text);
+      // });
+
+      state.items.sort(function (contact1, contact2) {
+        return contact1.name.localeCompare(contact2.name);
+      });
+    },
+    sortZtoA(state, action) {
+      //   const sortState = [...state].sort(function (task1, task2) {
+      //     return task1.text.localeCompare(task2.text);
+      //   });
+      state.items.sort(function (contact1, contact2) {
+        return contact2.name.localeCompare(contact1.name);
+      });
+    },
+  },
   extraReducers: {
     [fetchAllContacts.pending]: handlePending,
     [addNewContact.pending]: handlePending,
@@ -66,3 +85,4 @@ const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
+export const { sortAtoZ, sortZtoA } = contactsSlice.actions;

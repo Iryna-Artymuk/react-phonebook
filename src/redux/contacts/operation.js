@@ -13,7 +13,7 @@ export const fetchAllContacts = createAsyncThunk(
       // При успішному запиті повертаємо проміс із даними
       return response.data;
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       // При помилці запиту повертаємо проміс
       // який буде відхилений з текстом помилки
       //thunkAPI  це обєкт в якому є різні методи для роботи з createAsyncThunk

@@ -17,7 +17,7 @@ import { MdPersonAdd, MdSearch } from 'react-icons/md';
 import { BsSortAlphaDown } from 'react-icons/bs';
 
 import { FilterByName } from '../../components/FilterByName/FilterByName';
-// import { Sort } from '../../components/Sort/Sort';
+import { Sort } from '../../components/Sort/Sort';
 
 import css from './Contacts.module.css';
 export default function Contacts() {
@@ -45,7 +45,7 @@ export default function Contacts() {
     <div className={css.contentWrapper}>
       <h2 className={css.title}>Contacts</h2>
       <FilterByName activeFilter={activeFilter} />
-      {/* <Sort activeSort={activeSort} />  */}
+      <Sort activeSort={activeSort} />
 
       <IconButton
         onClick={toggleSort}

@@ -37,6 +37,7 @@ const authSlice = createSlice({
     },
     [updateUser.rejected](state, action) {
       state.authError = action.payload;
+      console.log(state.authError);
     },
   },
 });
