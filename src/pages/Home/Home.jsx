@@ -1,12 +1,8 @@
+import css from './Home.module.css';
 export default function HomePage() {
   return (
-    <div>
-      <h1>
-        wellcome page
-        <span role="img" aria-label="Greeting icon">
-          💁‍♀️
-        </span>
-      </h1>
+    <div class={css.book}>
+      <h1>Contacts book</h1>
     </div>
   );
 }

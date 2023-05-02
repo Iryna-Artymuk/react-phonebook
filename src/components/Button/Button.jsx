@@ -15,7 +15,8 @@ export const Button = ({
       type={type}
       {...otherProps}
     >
-      {children}
+      <span> {children}</span>
+      <i></i>
     </button>
   );
 };

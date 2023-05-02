@@ -1,0 +1,69 @@
+.book {
+  position: absolute;
+  width: 280px;
+  height: 420px;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  background: gray;
+  border-radius: 20px 16px 12px 32px;
+  background-image: linear-gradient(
+    to right,
+    pink 48px,
+    pink 50px,
+    transparent 50px
+  );
+  /* box-shadow: 2px 6px 40px 0px #fea600; */
+}
+.book:after {
+  height: 52px;
+  width: 274px;
+  bottom: 4px;
+  right: 0px;
+  background: white;
+  border-radius: 32px 4px 4px 32px;
+  box-shadow: inset 4px 6px 0px 0px #e4e0ce;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 6px,
+    #e4e0ce 8px,
+    transparent 8px,
+    transparent 12px,
+    #e4e0ce 12px,
+    transparent 14px,
+    transparent 18px,
+    #e4e0ce 18px,
+    transparent 20px,
+    transparent 24px,
+    #e4e0ce 24px,
+    transparent 26px,
+    transparent 30px,
+    #e4e0ce 30px,
+    transparent 32px,
+    transparent 36px,
+    #e4e0ce 36px,
+    transparent 38px,
+    transparent 42px,
+    #e4e0ce 42px,
+    transparent 44px,
+    transparent 48px,
+    #e4e0ce 48px,
+    transparent 50px
+  );
+}
+/* .book:before {
+  height: 20px;
+  width: 160px;
+  right: 40px;
+  top: 72px;
+  background: #d11f2f;
+  border-radius: 20px;
+  box-shadow: 0px 36px #d11f2f;
+} */
+.book h1 {
+  color: pink;
+  font-size: 34px;
+  position: absolute;
+  top: 100px;
+  right: 5px;
+}

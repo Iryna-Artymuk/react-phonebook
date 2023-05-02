@@ -1,0 +1,11 @@
+.userName {
+  margin: 10px 0;
+  /* padding-bottom: 10px; */
+  width: 100%;
+  color: #78788c;
+  font-size: 18px;
+}
+.userWrapper {
+  display: flex;
+  gap: 10px;
+}

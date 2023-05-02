@@ -2,7 +2,7 @@ import Navigation from '../Navigation/Navigation';
 import { Button } from 'components/Button/Button';
 import UserMenu from '../UserMenu/UserMenu';
 import { useAuthSelect } from '../../hooks/UseAuthSelect';
-
+import css from './Header.module.css';
 export default function Header({
   logInModal,
   setLogInModal,
@@ -12,13 +12,13 @@ export default function Header({
   const { isLoggedIn } = useAuthSelect();
 
   return (
-    <header>
+    <header className={css.header}>
       <Navigation />
 
       {isLoggedIn ? (
         <UserMenu />
       ) : (
-        <div>
+        <div className={css.headerButtonsWrapper}>
           <Button onClick={() => setLogInModal(!logInModal)}>Log in </Button>
           <Button onClick={() => setRegisterModal(!registerModal)}>
             Register

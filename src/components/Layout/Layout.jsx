@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 // import { Toaster } from 'react-hot-toast';
 import { Suspense } from 'react';
 import Header from '../Header/Header';
+import css from './Layout.module.css';
 export default function Layout({
   logInModal,
   setLogInModal,
@@ -10,7 +11,7 @@ export default function Layout({
   registerModal,
 }) {
   return (
-    <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 16px' }}>
+    <div className={css.container}>
       <Header
         LogInModal={logInModal}
         setLogInModal={setLogInModal}
