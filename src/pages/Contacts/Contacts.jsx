@@ -43,46 +43,49 @@ export default function Contacts() {
 
   return (
     <div className={css.contentWrapper}>
-      <span>
-        <h2 className={css.title}>Contacts</h2>
-        <FilterByName activeFilter={activeFilter} />
-        <Sort activeSort={activeSort} />
-        <IconButton
-          onClick={toggleSort}
-          type="button"
-          aria-label=" sort contacts by name"
-          sortButton
-        >
-          <BsSortAlphaDown />
-        </IconButton>
-        <IconButton
-          onClick={toggleFilter}
-          type="button"
-          aria-label=" find contact by name"
-          searchButton
-        >
-          <MdSearch />
-        </IconButton>
-        <IconButton
-          onClick={toggleModal}
-          type="button"
-          aria-label=" add contact"
-          addContactButton
-        >
-          <MdPersonAdd />
-        </IconButton>
-        {modalAddContactActive && (
-          <Modal togglModal={toggleModal}>
-            <AddContactForm />
-          </Modal>
-        )}
-        <div>
-          {isLoading && <p>Loading contacts...</p>}
-          {error && <p>{error}</p>}
-        </div>
-        {contactsList && <ContactsList />}
-      </span>
-      <i></i>
+      <h2 className={css.title}>Contacts</h2>
+      <FilterByName activeFilter={activeFilter} />
+      <Sort activeSort={activeSort} />
+      <IconButton
+        onClick={toggleSort}
+        type="button"
+        aria-label=" sort contacts by name"
+        sortButton
+      >
+        <BsSortAlphaDown />
+      </IconButton>
+      <IconButton
+        onClick={toggleFilter}
+        type="button"
+        aria-label=" find contact by name"
+        searchButton
+      >
+        <MdSearch />
+      </IconButton>
+      <IconButton
+        onClick={toggleModal}
+        type="button"
+        aria-label=" add contact"
+        addContactButton
+      >
+        <MdPersonAdd />
+      </IconButton>
+      {modalAddContactActive && (
+        <Modal togglModal={toggleModal}>
+          <AddContactForm />
+        </Modal>
+      )}
+      <div>
+        {isLoading && <p>Loading contacts...</p>}
+        {error && <p>{error}</p>}
+      </div>
+      {contactsList.length > 0 ? (
+        <ContactsList />
+      ) : (
+        <p className={css.text}>
+          you don't have any contacts in your list yet{' '}
+        </p>
+      )}
     </div>
   );
 }

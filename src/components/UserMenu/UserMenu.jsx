@@ -5,14 +5,17 @@ import { logout } from '../../redux/Auth/operations';
 import css from './UserMenu.module.css';
 export default function UserMenu() {
   const { user } = useAuthSelect();
+  const { isRefreshing } = useAuthSelect();
 
   const dispatch = useDispatch();
   dispatch(logout);
 
-  return (
+  return !isRefreshing ? (
     <div className={css.userWrapper}>
       <p className={css.userName}> Wellcome {user.name} </p>
       <Button onClick={() => dispatch(logout())}> Logout </Button>
     </div>
+  ) : (
+    <p>...refreshing user</p>
   );
 }

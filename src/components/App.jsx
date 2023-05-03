@@ -9,13 +9,12 @@ import Modal from '../components/Modal/Modal';
 import LogInForm from './Forms/LoginForm';
 import Registerform from './Forms/RegisterForm';
 import { updateUser } from '../redux/Auth/operations';
-// import { useAuthSelect } from '../hooks/UseAuthSelect';
+
 export const App = () => {
   const [logInModal, setLogInModal] = useState(false);
   const [registerModal, setRegisterModal] = useState(false);
   const dispatch = useDispatch();
-  // const { authError } = useAuthSelect();
-  // console.log(authError);
+
   useEffect(() => {
     dispatch(updateUser());
   }, [dispatch]);
@@ -42,7 +41,6 @@ export const App = () => {
               <PrivateRoute redirectTo="/" component={<ContactsPage />} />
             }
           />
-          {/* <Route path="/contacts" element={<ContactsPage />} /> */}
         </Route>
       </Routes>
 

@@ -26,6 +26,10 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.isLoggedIn = true;
     },
+    [logIn.rejected](state, action) {
+      state.authError = action.payload;
+      console.log(action.payload);
+    },
     [logout.fulfilled](state, action) {
       state.user = { name: null, email: null };
       state.token = null;
@@ -34,10 +38,14 @@ const authSlice = createSlice({
     [updateUser.fulfilled](state, action) {
       state.user = action.payload;
       state.isLoggedIn = true;
+      state.isRefreshing = false;
     },
     [updateUser.rejected](state, action) {
       state.authError = action.payload;
-      console.log(state.authError);
+      state.isRefreshing = false;
+    },
+    [updateUser.pending](state) {
+      state.isRefreshing = true;
     },
   },
 });

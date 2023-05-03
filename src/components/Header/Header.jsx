@@ -10,7 +10,9 @@ export default function Header({
   setRegisterModal,
 }) {
   const { isLoggedIn } = useAuthSelect();
-
+  const { isRefreshing } = useAuthSelect();
+  const { authError } = useAuthSelect();
+  // console.log(authError);
   return (
     <header className={css.header}>
       <Navigation />
@@ -18,11 +20,20 @@ export default function Header({
       {isLoggedIn ? (
         <UserMenu />
       ) : (
-        <div className={css.headerButtonsWrapper}>
-          <Button onClick={() => setLogInModal(!logInModal)}>Log in </Button>
-          <Button onClick={() => setRegisterModal(!registerModal)}>
-            Register
-          </Button>
+        <div>
+          {!isRefreshing ? (
+            <div className={css.headerButtonsWrapper}>
+              <Button onClick={() => setLogInModal(!logInModal)}>
+                Log in{' '}
+              </Button>
+              <Button onClick={() => setRegisterModal(!registerModal)}>
+                Register
+              </Button>
+            </div>
+          ) : (
+            <p className={css.refreshingtext}> refreshing user</p>
+          )}
+          {authError && <p className={css.loginError}>User not found :(</p>}
         </div>
       )}
     </header>
