@@ -10,15 +10,15 @@ import css from './Forms.module.css';
 export default function RegisterForm({ registerModal, setRegisterModal }) {
   const dispatch = useDispatch();
 
-  const LoginValidationSchema = Yup.object().shape({
+  const ValidationSchema = Yup.object().shape({
     name: Yup.string().required('Name is  required'),
 
     password: Yup.string()
-      // .min(8, 'Password must be 8 characters long')
-      // .matches(/[0-9]/, 'Password requires a number')
-      // .matches(/[a-z]/, 'Password requires a lowercase letter')
-      // .matches(/[A-Z]/, 'Password requires an uppercase letter')
-      // .matches(/[^\w]/, 'Password requires a symbol')
+      .min(8, 'Password must be 8 characters long')
+      .matches(/[0-9]/, 'Password requires a number')
+      .matches(/[a-z]/, 'Password requires a lowercase letter')
+      .matches(/[A-Z]/, 'Password requires an uppercase letter')
+      .matches(/[^\w]/, 'Password requires a symbol')
       .required(' password is   required'),
     // email: Yup.string().email('Invalid email').required('Required'),
     email: Yup.string().required('Required'),
@@ -45,7 +45,7 @@ export default function RegisterForm({ registerModal, setRegisterModal }) {
         handleSubmit(value);
         action.resetForm();
       }}
-      validationSchema={LoginValidationSchema}
+      validationSchema={ValidationSchema}
     >
       <Form className={css.form}>
         <label>

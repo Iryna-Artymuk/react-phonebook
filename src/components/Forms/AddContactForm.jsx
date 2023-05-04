@@ -1,4 +1,4 @@
-import { Formik, Field, ErrorMessage, Form } from 'formik';
+import { Formik, Field, ErrorMessage } from 'formik';
 import MaskedInput from 'react-text-mask';
 import * as Yup from 'yup';
 import { addNewContact } from '../../redux/contacts/operation';

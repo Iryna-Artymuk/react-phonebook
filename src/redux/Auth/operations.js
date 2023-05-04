@@ -19,15 +19,13 @@ export const register = createAsyncThunk(
       return res.data;
     } catch (error) {
       console.log(error.response);
-      if (error.response.data._message === 'User validation failed') {
-        return thunkAPI.rejectWithValue('password not strong enough');
-      }
 
       if (error.response.data.code === 11000) {
         return thunkAPI.rejectWithValue(
           `user with email ${credentials.email} already exist`
         );
       }
+      return thunkAPI.rejectWithValue(error.response);
     }
   }
 );
