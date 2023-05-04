@@ -12,7 +12,7 @@ export default function Header({
   const { isLoggedIn } = useAuthSelect();
   const { isRefreshing } = useAuthSelect();
   const { authError } = useAuthSelect();
-  // console.log(authError);
+  console.log(authError);
   return (
     <header className={css.header}>
       <Navigation />
@@ -33,7 +33,7 @@ export default function Header({
           ) : (
             <p className={css.refreshingtext}> refreshing user</p>
           )}
-          {authError && <p className={css.loginError}>User not found :(</p>}
+          {authError && <p className={css.loginError}>{authError}</p>}
         </div>
       )}
     </header>

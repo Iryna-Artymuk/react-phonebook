@@ -31,7 +31,7 @@ export default function RegisterForm({ registerModal, setRegisterModal }) {
 
     // dispatch(register(value));
     dispatch(register(value));
-    console.log(registerModal);
+    // console.log(registerModal);
     setRegisterModal(!registerModal);
   };
   return (
