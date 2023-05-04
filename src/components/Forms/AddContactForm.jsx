@@ -1,5 +1,5 @@
 import { Formik, Field, ErrorMessage, Form } from 'formik';
-
+import MaskedInput from 'react-text-mask';
 import * as Yup from 'yup';
 import { addNewContact } from '../../redux/contacts/operation';
 
@@ -8,18 +8,33 @@ import { useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
 
 import css from './Forms.module.css';
+const phoneNumberMask = [
+  '(',
+  /\d/,
+  /\d/,
+  /\d/,
+  ')',
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+  '-',
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+];
 export const AddContactForm = () => {
   const dispatch = useDispatch();
 
-  const phoneRegExp =
-    /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,3})|(\(?\d{2,3}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$/;
+  // const phoneRegExp =
+  //   /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,3})|(\(?\d{2,3}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$/;
 
   const ContactValidationSchema = Yup.object().shape({
     name: Yup.string().required('Name is  required'),
 
-    phone_number: Yup.string()
-      .required('Phone is  required')
-      .matches(phoneRegExp, 'Phone number is not valid'),
+    phone_number: Yup.string().required('Phone is  required'),
+    // .matches(phoneRegExp, 'Phone number is not valid'),
   });
 
   const handleSubmit = value => {
@@ -42,7 +57,7 @@ export const AddContactForm = () => {
       }}
       validationSchema={ContactValidationSchema}
     >
-      <Form className={css.form}>
+      {/* <Form className={css.form}>
         <label>
           Name
           <Field
@@ -52,8 +67,8 @@ export const AddContactForm = () => {
             placeholder="Enter name"
           />
         </label>
-        <ErrorMessage className={css.error} name="name" component="div" />
-        <label htmlFor="phone_number">
+        <ErrorMessage className={css.error} name="name" component="div" /> */}
+      {/* <label htmlFor="phone_number">
           Phone number
           <Field
             className={css.input}
@@ -66,9 +81,41 @@ export const AddContactForm = () => {
           className={css.error}
           name="phone_number"
           component="div"
-        />
-        <Button type="submit">Add contact </Button>
-      </Form>
+        /> */}
+      {props => {
+        const { handleChange, handleSubmit } = props;
+        return (
+          <form className={css.form} onSubmit={handleSubmit}>
+            <label>
+              Name
+              <Field
+                className={css.input}
+                type="text"
+                name="name"
+                placeholder="Enter name"
+              />
+            </label>
+            <ErrorMessage className={css.error} name="name" component="div" />
+            <Field name="phone_number">
+              {({ field }) => (
+                <MaskedInput
+                  {...field}
+                  type="tel"
+                  mask={phoneNumberMask}
+                  placeholder="Enter phone number"
+                  guide={true}
+                  keepCharPositions={true}
+                  showMask={true}
+                  onChange={handleChange}
+                  className={css.input}
+                />
+              )}
+            </Field>
+            <Button type="submit">Add contact </Button>
+          </form>
+        );
+      }}
+      {/* </Form> */}
     </Formik>
   );
 };
