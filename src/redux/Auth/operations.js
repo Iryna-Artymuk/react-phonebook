@@ -18,7 +18,9 @@ export const register = createAsyncThunk(
       token.set(res.data.token);
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(`user ${credentials.name} already exist`);
+      return thunkAPI.rejectWithValue(
+        `user with email ${credentials.email} already exist`
+      );
     }
   }
 );
@@ -34,7 +36,7 @@ export const logIn = createAsyncThunk(
       token.set(res.data.token);
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue('User not fount ');
+      return thunkAPI.rejectWithValue('User not fount');
     }
   }
 );
