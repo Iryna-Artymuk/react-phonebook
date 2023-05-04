@@ -18,7 +18,7 @@ export const register = createAsyncThunk(
       token.set(res.data.token);
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue('user already exist');
+      return thunkAPI.rejectWithValue(`user ${credentials.name} already exist`);
     }
   }
 );
